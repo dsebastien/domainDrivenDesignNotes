@@ -44,7 +44,11 @@ From an event sourcing perspective, both entities and value objects play importa
 
 ## Aggregate
 
-A larger unit of encapsulation than just a class.
+Some definitions:
+
+* a larger unit of encapsulation than just a class
+* a cluster of associated objects
+  * example: model for a shopping cart: products, line items, quantity of a product
 
 Every transaction is scoped to a single aggregate
 
@@ -64,9 +68,19 @@ Sharding can be made based on aggregates since they represent an isolated part o
 
 ## Aggregate Root
 
-The aggregate forms a tree or graph of object relations.
+Each aggregate forms a tree or graph of object relations.
 
 The aggregate root is the one at the top, which "speaks" for the whole and may delegate down to the rest. It's the one that the rest of the world communicates with.
+
+An aggregate root is the entry point that accepts commands for an aggregate.
+
+## Sagas \(aka Process Managers\)
+
+* component that reacts to domain events in a cross-aggregate, eventually consistent manner \(time can also be a trigger\)
+* sagas are sometimes purely reactive and sometime represent workflows
+* a saga is a state machine driven forward by incoming events \(which may come from different aggregates\)
+* some states will have side-effects \(e.g., sending commands, talking to external Web Services, sending e-mails, ...\)
+* sagas are doing things that individual aggregates can't do
 
 
 
