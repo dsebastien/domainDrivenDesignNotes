@@ -42,3 +42,31 @@ Native types are good examples of value objects. It is common to make VOs immuta
 
 From an event sourcing perspective, both entities and value objects play important roles in the domain, but only entities need to be persisted since only these may change.
 
+## Aggregate
+
+A larger unit of encapsulation than just a class.
+
+Every transaction is scoped to a single aggregate
+
+An aggregate handles commands, applies events and has a state model encapsulated within it that allow it to implement the required commands validation \(i.e., business rules\) of the aggregate.
+
+Requiring a transaction to span across multiple aggregates doesn't make much sense, it usually means that the aggregates are not well defined:
+
+* rethink aggregate boundaries
+* review the responsibilities of each aggregate
+* rethink the non-functional requirements of the system
+
+A single command can't act on a set of aggregates.
+
+An aggregate can't send events directly to other aggregates. Other aggregates might be interested by events of the other parts but should be listening on their own to avoid strong coupling.
+
+Sharding can be made based on aggregates since they represent an isolated part of the system.
+
+## Aggregate Root
+
+The aggregate forms a tree or graph of object relations.
+
+The aggregate root is the one at the top, which "speaks" for the whole and may delegate down to the rest. It's the one that the rest of the world communicates with.
+
+
+
