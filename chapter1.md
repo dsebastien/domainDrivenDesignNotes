@@ -28,6 +28,16 @@ Having a ubiquitous language makes communication clearer and allows teams to see
 
 A division of a larger system that has its own ubiquitous language and domain model.
 
+Coined by Eric Erans. Bounded contexts provide a way to decompose a large, complex system into more manageable pieces. A large system is composed of multiple bounded contexts.
+
+Each bounded context is the context for its own self-contained domain model, and has its own ubiquitous language.
+
+A bounded context can also be seen as an autonomous business component defining clear consistency boundaries: one bounded context typically communicates with another bounded context by raising events.
+
+## Context map
+
+Context maps helps providing an overview of the whole system and helping people to understand the details of how different bounded contexts interact with each other.
+
 ## Entity
 
 An entity or reference type is characterized by having an identity that's not tied to its attribute values. All attributes in an entity can change and it's still "the same" entity.
@@ -69,9 +79,9 @@ Sharding can be made based on aggregates since they represent an isolated part o
 
 ## Aggregate Root
 
-Each aggregate forms a tree or graph of object relations.
+In DDD, an aggregate root is a consistent boundary around a set of system entities. They should be able to be loaded from persistence as a unit and saved as one.
 
-The aggregate root is the one at the top, which "speaks" for the whole and may delegate down to the rest. It's the one that the rest of the world communicates with.
+Each aggregate forms a tree or graph of object relations. The aggregate root is the one at the top, which "speaks" for the whole and may delegate down to the rest. It's the one that the rest of the world communicates with.
 
 An aggregate root is the entry point that accepts commands for an aggregate.
 
@@ -82,6 +92,15 @@ An aggregate root is the entry point that accepts commands for an aggregate.
 * a saga is a state machine driven forward by incoming events \(which may come from different aggregates\)
 * some states will have side-effects \(e.g., sending commands, talking to external Web Services, sending e-mails, ...\)
 * sagas are doing things that individual aggregates can't do
+* coordinates the behavior of the aggregates in the domain
+* subscribes to the events that the aggregates raise and then follow a set of rules to determine which command or commands to send
+* do not contain any business logic, only logic necessary to choose which commands to send
+
+## Transaction boundaries
+
+Boundary within which you can assume that all the elements remain consistent with each other all the time.
+
+To ensure the consistency of the system, transactions must succeed. To make sure of this, you need to ensure that the system is eventually consistent. Having reliable message delivery to aggregates is very important.
 
 
 
