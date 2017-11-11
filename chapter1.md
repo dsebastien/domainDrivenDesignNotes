@@ -49,6 +49,7 @@ Some definitions:
 * a larger unit of encapsulation than just a class
 * a cluster of associated objects
   * example: model for a shopping cart: products, line items, quantity of a product
+* a unit of a transaction boundary
 
 Every transaction is scoped to a single aggregate
 
