@@ -1,6 +1,8 @@
 # Summary
 
 * [Introduction](README.md)
-* [Terms](chapter1.md)
+* [Terms](/terms.md)
 * [Bounded Contexts](bounded-contexts.md)
+
+
 
