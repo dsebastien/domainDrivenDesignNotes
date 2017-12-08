@@ -77,6 +77,14 @@ An aggregate can't send events directly to other aggregates. Other aggregates mi
 
 Sharding can be made based on aggregates since they represent an isolated part of the system.
 
+Aggregates have:
+
+* input: you can communicate with them
+* rules: invariants or business rules
+* output: aggregate state
+* behavior
+* environment: context
+
 ## Aggregate Root
 
 In DDD, an aggregate root is a consistent boundary around a set of system entities. They should be able to be loaded from persistence as a unit and saved as one.
@@ -101,6 +109,4 @@ An aggregate root is the entry point that accepts commands for an aggregate.
 Boundary within which you can assume that all the elements remain consistent with each other all the time.
 
 To ensure the consistency of the system, transactions must succeed. To make sure of this, you need to ensure that the system is eventually consistent. Having reliable message delivery to aggregates is very important.
-
-
 
